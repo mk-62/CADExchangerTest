@@ -12,7 +12,7 @@
 #include <iostream>
 #include <cmath>
 
-namespace testwork
+namespace
 {
     const double PI = std::atan(1.0)*4;
 }

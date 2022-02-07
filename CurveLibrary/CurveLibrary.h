@@ -44,12 +44,13 @@ namespace testwork
     {
     public:
         Curve() = default;
+        virtual ~Curve() noexcept = default;
 
         virtual V3d Point(double t) = 0;
         virtual V3d FirstDerivative(double t) = 0;
 
-        virtual void(*Id() const)() = 0;
-        virtual ~Curve() noexcept = default;
+        virtual void(*SelfId() const)() = 0;
+        template <class T> bool IsCurveType() { return SelfId()==&T::SelfType; }
     };
 
     class DLLIMPORT Circle : public Curve
@@ -65,7 +66,7 @@ namespace testwork
         virtual V3d FirstDerivative(double t);
 
         static void SelfType();
-        void(*Id() const)() override { return &Circle::SelfType; }
+        void(*SelfId() const)() override { return &Circle::SelfType; }
     };
 
     class DLLIMPORT Ellipse : public Curve
@@ -83,7 +84,7 @@ namespace testwork
         virtual V3d FirstDerivative(double t);
 
         static void SelfType();
-        void(*Id() const)() override { return &Ellipse::SelfType; }
+        void(*SelfId() const)() override { return &Ellipse::SelfType; }
     };
 
     class DLLIMPORT Helix : public Curve
@@ -101,7 +102,7 @@ namespace testwork
         virtual V3d FirstDerivative(double t);
 
         static void SelfType();
-        void(*Id() const)() override { return &Helix::SelfType; }
+        void(*SelfId() const)() override { return &Helix::SelfType; }
     };
 
 }
