@@ -33,18 +33,18 @@ std::vector<std::shared_ptr<Curve>> static GenerateCurves(int count,
 {
     std::vector<std::shared_ptr<Curve>> container;
 
-    if(count<0) throw std::out_of_range("invalid figures count");
+    if(count<0) throw std::out_of_range("invalid curves count");
     if(radius_min<=0 || radius_min>radius_max)throw invalid_radius();
     if(step_min<=0 && step_max>=0 || step_min>step_max)throw invalid_step();
 
     std::random_device rd;
     std::default_random_engine random_engine(rd());
-    std::uniform_int_distribution<> figures_dist(0, 2);
+    std::uniform_int_distribution<> curves_dist(0, 2);
     std::uniform_real_distribution<> radius_dist(radius_min,radius_max);
     std::uniform_real_distribution<> step_dist(step_min,step_max);
 
     container.reserve((size_t)count);
-    for(int i=0;i<count;++i)switch (figures_dist(random_engine))
+    for(int i=0;i<count;++i)switch (curves_dist(random_engine))
     {
     case 0: 
         container.emplace_back(std::make_shared<Circle>(

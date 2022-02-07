@@ -49,7 +49,7 @@ namespace testwork
         virtual V3d Point(double t) = 0;
         virtual V3d FirstDerivative(double t) = 0;
 
-        virtual void(*SelfId() const)() = 0;
+        virtual void(*SelfId() const)() = 0; //Don't like redundant RTTI
         template <class T> bool IsCurveType() { return SelfId()==&T::SelfType; }
     };
 
